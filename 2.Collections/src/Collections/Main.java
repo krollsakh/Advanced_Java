@@ -1,10 +1,15 @@
 package Collections;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        exampleLinkedHashMap();
+        //exampleLinkedHashMap();
+
+        exampleWeakHashMap();
 
     }
 
@@ -26,5 +31,28 @@ public class Main {
         System.out.println(lruCache); // {2=two, 9=nine}
 
     }
+
+    public static void exampleWeakHashMap() {
+        // Пример, показывающий как из WeakHashMap удаляются элементы, ссылка на которые имеется в мапе
+
+        Map<Data, String> map = new WeakHashMap<>();
+        Data data = new Data(); // какой-то объект
+
+        map.put(data, "information");
+
+        data = null;
+
+        for (int i = 0; i < 1000000; i++) {
+            if (map.isEmpty()) {
+                System.out.println("Empty");
+                break;
+            } else {
+                System.out.println(i);
+            }
+        }
+
+    }
+
+    public static class Data {}
 }
 
